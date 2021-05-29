@@ -102,15 +102,15 @@ public class MainActivity extends Activity {
 									try
 									{
 										JSONObject info = new JSONObject(myRes);
-										//String pen = info.get("pendientes").toString();
 										JSONArray pend = new JSONArray(info.get("pendientes").toString());
-										//Log.d("pendientes", pen);
 										
 										ArrayList<String> list = new ArrayList<String>();
 										for (int i=0; i < pend.length(); i++)
 										{
 											JSONObject u = pend.getJSONObject(i);
-											list.add(u.get("nombre").toString());
+											String cant = u.get("cantidad").toString();
+											String nomb = u.get("nombre").toString();
+											list.add(cant + " de " + nomb);
 											Log.d("ObjetoParseado", "Pos: " + i + " - " + u.toString());
 
 										}
@@ -125,7 +125,7 @@ public class MainActivity extends Activity {
 
 			});
 	}
-	public void renderList(ArrayList<String> list) {
+	public void renderList(final ArrayList<String> list) {
 		final ListView listview = (ListView) findViewById(R.id.mylist);
 		/*String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
 			"Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",

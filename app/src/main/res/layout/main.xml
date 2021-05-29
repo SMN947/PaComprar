@@ -32,17 +32,22 @@
 				android:layout_height="wrap_content"
 				android:layout_width="0dp"
 				android:layout_weight="1"
-				android:textOn="Pendientes"/>
+				android:textOn="Pendientes"
+				android:textOff="Pendientes"/>
 
 			<ToggleButton
 				android:layout_height="wrap_content"
 				android:layout_width="0dp"
-				android:layout_weight="1"/>
+				android:layout_weight="1"
+				android:textOff="+ Añadir"
+				android:textOn="+ Añadir"/>
 
 			<ToggleButton
 				android:layout_height="wrap_content"
 				android:layout_width="0dp"
-				android:layout_weight="1"/>
+				android:layout_weight="1"
+				android:textOff="Comprados"
+				android:textOn="Comprados"/>
 
 		</LinearLayout>
 
