@@ -94,7 +94,7 @@ public class MainActivity extends Activity {
 	}
 	public Request buildReq(RequestBody body) {
 		Request request = new Request.Builder()
-			.url("https://smn947.com.co/API")
+			.url("https://smn947.com.co/API/index.php?t=r")
 			.build();
 		return request;
 	}
