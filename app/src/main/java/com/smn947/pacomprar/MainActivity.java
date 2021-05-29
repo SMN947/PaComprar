@@ -34,6 +34,25 @@ public class MainActivity extends Activity {
 
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+		
+		ToggleButton toggleAlarm = findViewById(R.id.pendbtn);
+		toggleAlarm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					if(isChecked)
+					{
+						Log.d("alarmCheck","ALARM SET TO TRUE");
+						//sched.setAlarm(true);
+					}
+					else
+					{
+						Log.d("alarmCheck","ALARM SET TO FALSE");
+						//sched.setAlarm(false);
+					}
+
+				}
+			});
 
 		test();
 		

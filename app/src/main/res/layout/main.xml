@@ -33,7 +33,8 @@
 				android:layout_width="0dp"
 				android:layout_weight="1"
 				android:textOn="Pendientes"
-				android:textOff="Pendientes"/>
+				android:textOff="Pendientes"
+				android:id="@+id/pendbtn"/>
 
 			<ToggleButton
 				android:layout_height="wrap_content"
