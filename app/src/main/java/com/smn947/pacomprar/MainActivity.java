@@ -105,13 +105,16 @@ public class MainActivity extends Activity {
 										//String pen = info.get("pendientes").toString();
 										JSONArray pend = new JSONArray(info.get("pendientes").toString());
 										//Log.d("pendientes", pen);
+										
+										ArrayList<String> list = new ArrayList<String>();
 										for (int i=0; i < pend.length(); i++)
 										{
 											JSONObject u = pend.getJSONObject(i);
+											list.add(u.get("nombre").toString());
 											Log.d("ObjetoParseado", "Pos: " + i + " - " + u.toString());
 
 										}
-										renderList();
+										renderList(list);
 									}
 									catch (JSONException e)
 									{}
@@ -122,9 +125,9 @@ public class MainActivity extends Activity {
 
 			});
 	}
-	public void renderList() {
+	public void renderList(ArrayList<String> list) {
 		final ListView listview = (ListView) findViewById(R.id.mylist);
-		String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
+		/*String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
 			"Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
 			"Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
 			"OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
@@ -134,7 +137,7 @@ public class MainActivity extends Activity {
 		for (int i = 0; i < values.length; ++i)
 		{
 			list.add(values[i]);
-		}
+		}*/
 		final StableArrayAdapter adapter = new StableArrayAdapter(this,
 																  android.R.layout.simple_list_item_1, list);
 		listview.setAdapter(adapter);
