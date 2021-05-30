@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 				}
 			});
 
-		test();
+		start();
 		
 		
 	}
@@ -84,52 +84,44 @@ public class MainActivity extends Activity {
 		}
 
 	}
-
-	public void test() {
-		OkHttpClient cliente = new OkHttpClient();
-		MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-		RequestBody body = RequestBody.create(mediaType, "uid=test1%2f26&cell=0");
-
-		start(cliente, body);
-	}
+	
 	public Request buildReq(RequestBody body) {
 		Request request = new Request.Builder()
 			.url("https://smn947.com.co/API/index.php?t=r")
 			.build();
 		return request;
 	}
-	public void start(OkHttpClient client, RequestBody body) {
+	public void start() {
+		OkHttpClient client = new OkHttpClient();
+		MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+		RequestBody body = RequestBody.create(mediaType, "uid=test1%2f26&cell=0");
+		
 		Request request = buildReq(body);
 		client.newCall(request).enqueue(new Callback() {
-
-
 				@Override
 				public void onFailure(Call call, IOException e) {
 					e.printStackTrace();
 				}
-
 				@Override
 				public void onResponse(Call call, Response response) throws IOException {
-					if (response.isSuccessful())
-					{
+					if (response.isSuccessful()) {
 						final String myRes = response.body().string();
 
 						runOnUiThread(new Runnable() {
 								@Override
 								public void run() {
 									Log.d("La respuesta =>", myRes);
-									try
-									{
+									try {
 										JSONObject info = new JSONObject(myRes);
 										JSONArray pend = new JSONArray(info.get("pendientes").toString());
 										
 										ArrayList<String> list = new ArrayList<String>();
-										for (int i=0; i < pend.length(); i++)
-										{
+										for (int i=0; i < pend.length(); i++) {
 											JSONObject u = pend.getJSONObject(i);
+											String med = u.get("medida").toString();
 											String cant = u.get("cantidad").toString();
 											String nomb = u.get("nombre").toString();
-											list.add(cant + " de " + nomb);
+											list.add(cant + " " + med + "(s) de " + nomb);
 											Log.d("ObjetoParseado", "Pos: " + i + " - " + u.toString());
 
 										}
@@ -145,18 +137,7 @@ public class MainActivity extends Activity {
 			});
 	}
 	public void renderList(final ArrayList<String> list) {
-		final ListView listview = (ListView) findViewById(R.id.mylist);
-		/*String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-			"Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-			"Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-			"OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-			"Android", "iPhone", "WindowsMobile" };
-
-		final ArrayList<String> list = new ArrayList<String>();
-		for (int i = 0; i < values.length; ++i)
-		{
-			list.add(values[i]);
-		}*/
+		final ListView listview = findViewById(R.id.mylist);
 		final StableArrayAdapter adapter = new StableArrayAdapter(this,
 																  android.R.layout.simple_list_item_1, list);
 		listview.setAdapter(adapter);

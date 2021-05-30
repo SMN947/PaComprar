@@ -26,24 +26,9 @@
 				android:layout_height="wrap_content"
 				android:layout_width="0dp"
 				android:layout_weight="1"
-				android:textOn="Pendientes"
-				android:textOff="Pendientes"
-				android:id="@+id/pendbtn"/>
+				android:textOff="+ Añadir"
+				android:textOn="+ Añadir"/>
 
-			<ToggleButton
-				android:layout_height="wrap_content"
-				android:layout_width="0dp"
-				android:layout_weight="1"
-				android:textOff="Comprados"
-				android:textOn="Comprados"/>
-
-
-			<ToggleButton
-				android:layout_height="wrap_content"
-				android:layout_width="0dp"
-				android:layout_weight="1"
-				android:textOff="Por Ley"
-				android:textOn="Por Ley"/>
 		</LinearLayout>
 
 		<ListView
