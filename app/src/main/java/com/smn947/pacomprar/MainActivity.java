@@ -60,11 +60,8 @@ public class MainActivity extends Activity {
 	}
 
 	private class StableArrayAdapter extends ArrayAdapter<String> {
-
 		HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
-
-		public StableArrayAdapter(Context context, int textViewResourceId,
-								  List<String> objects) {
+		public StableArrayAdapter(Context context, int textViewResourceId, List<String> objects) {
 			super(context, textViewResourceId, objects);
 			for (int i = 0; i < objects.size(); ++i)
 			{
@@ -84,6 +81,35 @@ public class MainActivity extends Activity {
 		}
 
 	}
+
+	public class UsersAdapter extends ArrayAdapter<User> {
+
+    public UsersAdapter(Context context, ArrayList<User> users) {
+
+       super(context, 0, users);
+
+    }
+
+
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+       // Get the data item for this position
+       User user = getItem(position);    
+       // Check if an existing view is being reused, otherwise inflate the view
+       if (convertView == null) {
+          convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_user, parent, false);
+       }
+       // Lookup view for data population
+       TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
+       TextView tvHome = (TextView) convertView.findViewById(R.id.tvHome);
+       // Populate the data into the template view using the data object
+       tvName.setText(user.name);
+       tvHome.setText(user.hometown);
+       // Return the completed view to render on screen
+       return convertView;
+   }
+}
 	
 	public Request buildReq(RequestBody body) {
 		Request request = new Request.Builder()
