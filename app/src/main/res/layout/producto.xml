@@ -5,15 +5,15 @@
       android:id="@+id/pdName"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Name" />
+      android:text="Nombre" />
    <TextView
       android:id="@+id/pdCant"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="HomeTown" />
+      android:text="Cantidad" />
    <TextView
       android:id="@+id/pdMedi"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="HomeTown" />
+      android:text="Medida" />
 </LinearLayout>
