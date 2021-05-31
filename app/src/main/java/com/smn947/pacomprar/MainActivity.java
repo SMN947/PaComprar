@@ -95,11 +95,22 @@ public class MainActivity extends Activity {
 			// Lookup view for data population
 			TextView pdName = convertView.findViewById(R.id.pdName);
 			TextView pdCant = convertView.findViewById(R.id.pdCant);
-			TextView pdMedi = convertView.findViewById(R.id.pdMedi);
+			Button min = convertView.findViewById(R.id.btnmin);
+			min.setTag(position);
+			min.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					int position = v.getTag();
+					Producto prod = getItem(position);
+					
+					Log.d("Selected", prod.cant + prod.name);
+				}
+			});
+			//TextView pdMedi = convertView.findViewById(R.id.pdMedi);
 			// Populate the data into the template view using the data object
 			pdName.setText(producto.name);
 			pdCant.setText(producto.cant);
-			pdCant.setText(producto.medi);
+			//pdMedi.setText(producto.medi);
 			// Return the completed view to render on screen
 			return convertView;
 		}
