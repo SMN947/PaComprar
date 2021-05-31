@@ -63,8 +63,7 @@ public class MainActivity extends Activity {
 		HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 		public StableArrayAdapter(Context context, int textViewResourceId, List<String> objects) {
 			super(context, textViewResourceId, objects);
-			for (int i = 0; i < objects.size(); ++i)
-			{
+			for (int i = 0; i < objects.size(); ++i) {
 				mIdMap.put(objects.get(i), i);
 			}
 		}
@@ -82,34 +81,29 @@ public class MainActivity extends Activity {
 
 	}
 
-	public class UsersAdapter extends ArrayAdapter<User> {
-
-    public UsersAdapter(Context context, ArrayList<User> users) {
-
-       super(context, 0, users);
-
-    }
-
-
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-       // Get the data item for this position
-       User user = getItem(position);    
-       // Check if an existing view is being reused, otherwise inflate the view
-       if (convertView == null) {
-          convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_user, parent, false);
-       }
-       // Lookup view for data population
-       TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-       TextView tvHome = (TextView) convertView.findViewById(R.id.tvHome);
-       // Populate the data into the template view using the data object
-       tvName.setText(user.name);
-       tvHome.setText(user.hometown);
-       // Return the completed view to render on screen
-       return convertView;
-   }
-}
+	public class UsersAdapter extends ArrayAdapter<Producto> {
+		public UsersAdapter(Context context, ArrayList<Producto> productos) {
+			super(context, 0, productos);
+		}
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			Producto producto = getItem(position);    // Get the data item for this position
+			// Check if an existing view is being reused, otherwise inflate the view
+			if (convertView == null) {
+				convertView = LayoutInflater.from(getContext()).inflate(R.layout.producto, parent, false);
+			}
+			// Lookup view for data population
+			TextView pdName = convertView.findViewById(R.id.pdName);
+			TextView pdCant = convertView.findViewById(R.id.pdCant);
+			TextView pdMedi = convertView.findViewById(R.id.pdMedi);
+			// Populate the data into the template view using the data object
+			pdName.setText(producto.nombre);
+			pdCant.setText(producto.cantidad);
+			pdCant.setText(producto.medida);
+			// Return the completed view to render on screen
+			return convertView;
+		}
+	}
 	
 	public Request buildReq(RequestBody body) {
 		Request request = new Request.Builder()
@@ -164,8 +158,7 @@ public class MainActivity extends Activity {
 	}
 	public void renderList(final ArrayList<String> list) {
 		final ListView listview = findViewById(R.id.mylist);
-		final StableArrayAdapter adapter = new StableArrayAdapter(this,
-																  android.R.layout.simple_list_item_1, list);
+		final StableArrayAdapter adapter = new StableArrayAdapter(this, android.R.layout.simple_list_item_1, list);
 		listview.setAdapter(adapter);
 
 		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
