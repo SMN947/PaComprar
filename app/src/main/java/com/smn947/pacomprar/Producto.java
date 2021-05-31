@@ -1,6 +1,6 @@
 package com.smn947.pacomprar;
 
-public class producto {
+public class Producto {
     public String name;
     public String cant;
     public String medi;

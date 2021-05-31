@@ -81,8 +81,8 @@ public class MainActivity extends Activity {
 
 	}
 
-	public class UsersAdapter extends ArrayAdapter<Producto> {
-		public UsersAdapter(Context context, ArrayList<Producto> productos) {
+	public class ProductosAdapter extends ArrayAdapter<Producto> {
+		public ProductosAdapter(Context context, ArrayList<Producto> productos) {
 			super(context, 0, productos);
 		}
 		@Override
@@ -97,9 +97,9 @@ public class MainActivity extends Activity {
 			TextView pdCant = convertView.findViewById(R.id.pdCant);
 			TextView pdMedi = convertView.findViewById(R.id.pdMedi);
 			// Populate the data into the template view using the data object
-			pdName.setText(producto.nombre);
-			pdCant.setText(producto.cantidad);
-			pdCant.setText(producto.medida);
+			pdName.setText(producto.name);
+			pdCant.setText(producto.cant);
+			pdCant.setText(producto.medi);
 			// Return the completed view to render on screen
 			return convertView;
 		}
@@ -133,18 +133,21 @@ public class MainActivity extends Activity {
 									Log.d("La respuesta =>", myRes);
 									try {
 										JSONObject info = new JSONObject(myRes);
-										JSONArray pend = new JSONArray(info.get("pendientes").toString());
+										JSONArray pend = new JSONArray(info.get("minstock").toString());
 										
-										ArrayList<String> list = new ArrayList<String>();
+										ArrayList<Producto> list = new ArrayList<Producto>();
+										
 										for (int i=0; i < pend.length(); i++) {
 											JSONObject u = pend.getJSONObject(i);
 											String med = u.get("medida").toString();
 											String cant = u.get("cantidad").toString();
 											String nomb = u.get("nombre").toString();
-											list.add(cant + " " + med + "(s) de " + nomb);
+											Producto prod = new Producto(nomb, cant, med);
+											list.add(prod);
 											Log.d("ObjetoParseado", "Pos: " + i + " - " + u.toString());
 
 										}
+										
 										renderList(list);
 									}
 									catch (JSONException e)
@@ -156,12 +159,13 @@ public class MainActivity extends Activity {
 
 			});
 	}
-	public void renderList(final ArrayList<String> list) {
+	public void renderList(final ArrayList<Producto> list) {
 		final ListView listview = findViewById(R.id.mylist);
-		final StableArrayAdapter adapter = new StableArrayAdapter(this, android.R.layout.simple_list_item_1, list);
+		//final StableArrayAdapter adapter = new StableArrayAdapter(this, android.R.layout.simple_list_item_1, list);
+		final ProductosAdapter adapter = new ProductosAdapter(this, list);
 		listview.setAdapter(adapter);
 
-		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		/*listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 				@Override
 				public void onItemClick(AdapterView<?> parent, final View view,
@@ -178,6 +182,6 @@ public class MainActivity extends Activity {
 						});
 				}
 
-			});
+			});*/
 	}
 }
